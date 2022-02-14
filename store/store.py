@@ -204,6 +204,8 @@ def get_counts_by_manufacturers(table):
         manufacturers_count[i] = counter
 
     # print(manufacturers_count)
+    label = 'Games counted by manufacturers'
+    ui.print_result(manufacturers_count, label)
     return manufacturers_count
 
 
@@ -226,4 +228,6 @@ def get_average_by_manufacturer(table, manufacturer):
             amount_of_games += int(line[IN_STOCK])
 
     # print(amount_of_games)
+    label = f'The average amount of games in stock of a {manufacturer}'
+    ui.print_result(amount_of_games, label)
     return amount_of_games

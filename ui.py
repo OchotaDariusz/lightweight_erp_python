@@ -39,7 +39,24 @@ def print_result(result, label):
         None: This function doesn't return anything it only prints to console.
     """
 
-    # your code
+    print("\n")
+    print(label)
+    if isinstance(result, dict):
+        for key, value in result.items():
+            print(str(key) + ': ' + str(value))
+    if isinstance(result, list):
+        for item in result:
+            print(str(item))
+    if isinstance(result, set):
+        for item in result:
+            print(str(item))
+    if isinstance(result, tuple):
+        for item in result:
+            print(str(item))
+    if isinstance(result, str):
+        print(result)
+    if isinstance(result, int):
+        print(result)
 
 
 def print_menu(title, list_options, exit_message):
