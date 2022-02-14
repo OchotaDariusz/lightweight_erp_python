@@ -41,6 +41,10 @@ def generate_random(table):
 def add_item(table, title_list):
     new_line = []
     id_ = generate_random(table)
+    for line in table:
+        if id_ == line[ID]:
+            id_ = generate_random(table)
+            continue
     new_line.append(id_)
     for title in title_list[1:]:
         user_input = ui.get_inputs(["Please enter: "], title)
