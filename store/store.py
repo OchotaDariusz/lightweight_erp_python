@@ -27,8 +27,43 @@ def start_module():
     Returns:
         None
     """
+    global table
+    global id_
+    global title
+    global manufacturer
+    global price
+    global in_stock
 
-    # your code
+    options = ["Display a table",
+               "Add new record",
+               "Remove record",
+               "Update record",
+               "Show how many different kinds of game are available of each manufacturer",
+               "Show the average amount of games in stock of a given manufacturer"]
+
+    ui.print_menu("Store Manager", options, "Back to main menu")
+
+    try:
+        inputs = ui.get_inputs(["Please enter a number: "], "")
+        option = inputs[0]
+        if option == "1":
+            show_table(table)
+        elif option == "2":
+            add(table)
+        elif option == "3":
+            remove(table, id_)
+        elif option == "4":
+            update(table, id_)
+        elif option == "5":
+            get_counts_by_manufacturers(table)
+        elif option == "6":
+            get_average_by_manufacturer(table, manufacturer)
+        elif option == "0":
+            pass
+        else:
+            raise KeyError("There is no such option.")
+    except KeyError as err:
+        ui.print_error_message(str(err))
 
 
 def show_table(table):
