@@ -11,7 +11,6 @@ Data table structure:
 
 # everything you'll need is imported:
 # User interface module
-from itertools import count
 import ui
 # data manager module
 import data_manager
