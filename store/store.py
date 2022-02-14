@@ -190,6 +190,7 @@ def get_counts_by_manufacturers(table):
     print(manufacturers_count)
     return manufacturers_count
 
+
 def get_average_by_manufacturer(table, manufacturer):
     """
     Question: What is the average amount of games in stock of a given manufacturer?
@@ -202,4 +203,11 @@ def get_average_by_manufacturer(table, manufacturer):
          number
     """
 
-    # your code
+    amount_of_games = 0
+    manufacturer = ''.join(manufacturer)
+    for line in table:
+        if manufacturer == line[MANUFACTURER]:
+            amount_of_games += int(line[IN_STOCK])
+
+    print(amount_of_games)
+    return amount_of_games
