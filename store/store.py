@@ -55,7 +55,7 @@ def start_module():
                 remove(table, id_=ui.get_inputs(["Please enter: "], title_list[0]))
                 continue
             elif option == "4":
-                update(table, id_)
+                update(table, id_=ui.get_inputs(["Please enter: "], title_list[0]))
                 continue
             elif option == "5":
                 get_counts_by_manufacturers(table)
@@ -98,13 +98,13 @@ def add(table):
     """
 
     global title_list
-    line = []
+    new_line = []
     id_ = common.generate_random(table)
-    line.append(id_)
+    new_line.append(id_)
     for title in title_list[1:]:
         user_input = ui.get_inputs(["Please enter: "], title)
-        line.append(''.join(user_input))
-    table.append(line)
+        new_line.append(''.join(user_input))
+    table.append(new_line)
 
     return table
 
@@ -142,7 +142,18 @@ def update(table, id_):
         list: table with updated record
     """
 
-    # your code
+    global title_list
+    new_line = []
+    id_ = ''.join(id_)
+    new_line.append(id_)
+    for line in table:
+        if id_ == line[0]:
+            index_to_update = table.index(line)
+            del table[index_to_update]
+    for title in title_list[1:]:
+        user_input = ui.get_inputs(["Please enter: "], title)
+        new_line.append(''.join(user_input))
+    table[index_to_update] = new_line
 
     return table
 
