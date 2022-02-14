@@ -102,7 +102,14 @@ def add(table):
         list: Table with a new record
     """
 
-    # your code
+    global title_list
+    line = []
+    id_ = common.generate_random(table)
+    line.append(id_)
+    for title in title_list[1:]:
+        user_input = ui.get_inputs(["Please enter: "], title)
+        line.append(''.join(user_input))
+    table.append(line)
 
     return table
 
