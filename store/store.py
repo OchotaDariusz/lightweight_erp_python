@@ -187,7 +187,7 @@ def get_counts_by_manufacturers(table):
     for i in manufacturers:
         manufacturers_count[i] = all_manufacturers.count(i)
 
-    print(manufacturers_count)
+    # print(manufacturers_count)
     return manufacturers_count
 
 
@@ -209,5 +209,5 @@ def get_average_by_manufacturer(table, manufacturer):
         if manufacturer == line[MANUFACTURER]:
             amount_of_games += int(line[IN_STOCK])
 
-    print(amount_of_games)
+    # print(amount_of_games)
     return amount_of_games
