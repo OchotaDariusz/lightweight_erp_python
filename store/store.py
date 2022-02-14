@@ -128,10 +128,12 @@ def remove(table, id_):
     """
 
     id_ = ''.join(id_)
+    line_counter = 0
     for line in table:
         if id_ == line[ID]:
-            del table[table.index(line)]
+            del table[line_counter]
             break
+        line_counter += 1
 
     return table
 
@@ -152,14 +154,20 @@ def update(table, id_):
     new_line = []
     id_ = ''.join(id_)
     new_line.append(id_)
+    line_counter = 0
     for line in table:
         if id_ == line[ID]:
-            index_to_update = table.index(line)
+            index_to_update = line_counter
             del table[index_to_update]
-    for title in title_list[1:]:
-        user_input = ui.get_inputs(["Please enter: "], title)
-        new_line.append(''.join(user_input))
-    table[index_to_update] = new_line
+            for title in title_list[1:]:
+                user_input = ui.get_inputs(["Please enter: "], title)
+                new_line.append(''.join(user_input))
+            if index_to_update <= len(table):
+                table.append(new_line)
+            else:
+                table[index_to_update] = new_line
+            break
+        line_counter += 1
 
     return table
 
@@ -185,7 +193,11 @@ def get_counts_by_manufacturers(table):
         all_manufacturers.append(line[MANUFACTURER])
         manufacturers.add(line[MANUFACTURER])
     for i in manufacturers:
-        manufacturers_count[i] = all_manufacturers.count(i)
+        counter = 0
+        for line in table:
+            if i == line[MANUFACTURER]:
+                counter += 1
+        manufacturers_count[i] = counter
 
     # print(manufacturers_count)
     return manufacturers_count
