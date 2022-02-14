@@ -9,3 +9,4 @@ __pycache__/
 
 # PyCharm
 .idea/
+tests.py
