@@ -3,7 +3,10 @@ implement commonly used functions here
 """
 
 import random
+import ui
 
+
+ID = 0
 
 
 def generate_random(table):
@@ -33,3 +36,49 @@ def generate_random(table):
     generated = ''.join(generated) + special_characters
 
     return generated
+
+
+def add_item(table, title_list):
+    new_line = []
+    id_ = generate_random(table)
+    new_line.append(id_)
+    for title in title_list[1:]:
+        user_input = ui.get_inputs(["Please enter: "], title)
+        new_line.append(''.join(user_input))
+    table.append(new_line)
+
+    return table
+
+
+def remove_item(table, id_):
+    id_ = ''.join(id_)
+    line_counter = 0
+    for line in table:
+        if id_ == line[ID]:
+            del table[line_counter]
+            break
+        line_counter += 1
+
+    return table
+
+
+def update_item(table, title_list, id_):
+    new_line = []
+    id_ = ''.join(id_)
+    new_line.append(id_)
+    line_counter = 0
+    for line in table:
+        if id_ == line[ID]:
+            index_to_update = line_counter
+            del table[index_to_update]
+            for title in title_list[1:]:
+                user_input = ui.get_inputs(["Please enter: "], title)
+                new_line.append(''.join(user_input))
+            if index_to_update <= len(table):
+                table.append(new_line)
+            else:
+                table[index_to_update] = new_line
+            break
+        line_counter += 1
+
+    return table
