@@ -18,6 +18,9 @@ import data_manager
 import common
 
 
+title_list = ["Id", "Title", "Manufacturer", "Price", "In stock"]
+
+
 def start_module():
     """
     Starts this module and displays its menu.
@@ -27,7 +30,7 @@ def start_module():
     Returns:
         None
     """
-    global table
+    table = data_manager.get_table_from_file("store/games.csv")
     global id_
     global title
     global manufacturer
@@ -41,29 +44,37 @@ def start_module():
                "Show how many different kinds of game are available of each manufacturer",
                "Show the average amount of games in stock of a given manufacturer"]
 
-    ui.print_menu("Store Manager", options, "Back to main menu")
 
-    try:
-        inputs = ui.get_inputs(["Please enter a number: "], "")
-        option = inputs[0]
-        if option == "1":
-            show_table(table)
-        elif option == "2":
-            add(table)
-        elif option == "3":
-            remove(table, id_)
-        elif option == "4":
-            update(table, id_)
-        elif option == "5":
-            get_counts_by_manufacturers(table)
-        elif option == "6":
-            get_average_by_manufacturer(table, manufacturer)
-        elif option == "0":
-            pass
-        else:
-            raise KeyError("There is no such option.")
-    except KeyError as err:
-        ui.print_error_message(str(err))
+    while True:
+        try:
+            ui.print_menu("Store Manager", options, "Back to main menu")
+            inputs = ui.get_inputs(["Please enter a number: "], "")
+            option = inputs[0]
+            if option == "1":
+                show_table(table)
+                continue
+            elif option == "2":
+                add(table)
+                continue
+            elif option == "3":
+                remove(table, id_)
+                continue
+            elif option == "4":
+                update(table, id_)
+                continue
+            elif option == "5":
+                get_counts_by_manufacturers(table)
+                continue
+            elif option == "6":
+                get_average_by_manufacturer(table, manufacturer)
+                continue
+            elif option == "0":
+                break
+            else:
+                raise KeyError("There is no such option.")
+                continue
+        except KeyError as err:
+            ui.print_error_message(str(err))
 
 
 def show_table(table):
@@ -76,8 +87,8 @@ def show_table(table):
     Returns:
         None
     """
-
-    # your code
+    global title_list
+    ui.print_table(table, title_list)
 
 
 def add(table):

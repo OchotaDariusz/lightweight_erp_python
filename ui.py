@@ -21,8 +21,10 @@ def print_table(table, title_list):
     Returns:
         None: This function doesn't return anything it only prints to console.
     """
-
-    # your goes code
+    print("\n")
+    print("{:<10} {:<40} {:<40} {:<8} {:<10}".format(*title_list))
+    for line in table:
+        print("{:<10} {:<40} {:40} {:<8} {:<10}".format(*line))
 
 
 def print_result(result, label):
@@ -91,7 +93,7 @@ def get_inputs(list_labels, title):
     inputs = []
 
     for label in list_labels:
-        user_input = input(label)
+        user_input = input(label + '\n' + f'{title} ')
         inputs.append(user_input)
 
     return inputs
