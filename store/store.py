@@ -11,6 +11,7 @@ Data table structure:
 
 # everything you'll need is imported:
 # User interface module
+from itertools import count
 import ui
 # data manager module
 import data_manager
@@ -18,6 +19,11 @@ import data_manager
 import common
 
 
+ID = 0
+TITLE = 1
+MANUFACTURER = 2
+PRICE = 3
+IN_STOCK = 4
 title_list = ["Id", "Title", "Manufacturer", "Price", "In stock"]
 
 
@@ -52,16 +58,16 @@ def start_module():
                 add(table)
                 continue
             elif option == "3":
-                remove(table, id_=ui.get_inputs(["Please enter: "], title_list[0]))
+                remove(table, id_=ui.get_inputs(["Please enter: "], title_list[ID]))
                 continue
             elif option == "4":
-                update(table, id_=ui.get_inputs(["Please enter: "], title_list[0]))
+                update(table, id_=ui.get_inputs(["Please enter: "], title_list[ID]))
                 continue
             elif option == "5":
                 get_counts_by_manufacturers(table)
                 continue
             elif option == "6":
-                get_average_by_manufacturer(table, manufacturer)
+                get_average_by_manufacturer(table, manufacturer=ui.get_inputs(["Please enter: "], title_list[MANUFACTURER]))
                 continue
             elif option == "0":
                 break
@@ -123,7 +129,7 @@ def remove(table, id_):
 
     id_ = ''.join(id_)
     for line in table:
-        if id_ == line[0]:
+        if id_ == line[ID]:
             del table[table.index(line)]
             break
 
@@ -147,7 +153,7 @@ def update(table, id_):
     id_ = ''.join(id_)
     new_line.append(id_)
     for line in table:
-        if id_ == line[0]:
+        if id_ == line[ID]:
             index_to_update = table.index(line)
             del table[index_to_update]
     for title in title_list[1:]:
@@ -172,8 +178,17 @@ def get_counts_by_manufacturers(table):
          dict: A dictionary with this structure: { [manufacturer] : [count] }
     """
 
-    # your code
+    all_manufacturers = list()
+    manufacturers = set()
+    manufacturers_count = dict()
+    for line in table:
+        all_manufacturers.append(line[MANUFACTURER])
+        manufacturers.add(line[MANUFACTURER])
+    for i in manufacturers:
+        manufacturers_count[i] = all_manufacturers.count(i)
 
+    print(manufacturers_count)
+    return manufacturers_count
 
 def get_average_by_manufacturer(table, manufacturer):
     """
