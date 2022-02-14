@@ -70,8 +70,9 @@ def start_module():
                 continue
             elif option == "6":
                 get_average_by_manufacturer(
-                    table, manufacturer=ui.get_inputs(["Please enter: "], title_list[MANUFACTURER])
-                    )
+                    table,
+                    manufacturer=ui.get_inputs(["Please enter: "], title_list[MANUFACTURER])
+                )
                 continue
             elif option == "0":
                 break
