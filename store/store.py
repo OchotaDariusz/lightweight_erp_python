@@ -35,7 +35,8 @@ def start_module():
     Returns:
         None
     """
-    table = data_manager.get_table_from_file("store/games.csv")
+    file_name = "store/games.csv"
+    table = data_manager.get_table_from_file(file_name)
 
     options = ["Display a table",
                "Add new record",
@@ -43,7 +44,6 @@ def start_module():
                "Update record",
                "Show how many different kinds of game are available of each manufacturer",
                "Show the average amount of games in stock of a given manufacturer"]
-
 
     while True:
         try:
@@ -55,18 +55,23 @@ def start_module():
                 continue
             elif option == "2":
                 add(table)
+                data_manager.write_table_to_file(file_name, table)
                 continue
             elif option == "3":
                 remove(table, id_=ui.get_inputs(["Please enter: "], title_list[ID]))
+                data_manager.write_table_to_file(file_name, table)
                 continue
             elif option == "4":
                 update(table, id_=ui.get_inputs(["Please enter: "], title_list[ID]))
+                data_manager.write_table_to_file(file_name, table)
                 continue
             elif option == "5":
                 get_counts_by_manufacturers(table)
                 continue
             elif option == "6":
-                get_average_by_manufacturer(table, manufacturer=ui.get_inputs(["Please enter: "], title_list[MANUFACTURER]))
+                get_average_by_manufacturer(
+                    table, manufacturer=ui.get_inputs(["Please enter: "], title_list[MANUFACTURER])
+                    )
                 continue
             elif option == "0":
                 break
