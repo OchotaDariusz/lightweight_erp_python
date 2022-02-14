@@ -5,6 +5,7 @@ implement commonly used functions here
 import random
 
 
+
 def generate_random(table):
     """
     Generates random and unique string. Used for id/key generation:
@@ -20,6 +21,15 @@ def generate_random(table):
 
     generated = ''
 
-    # your code
+    special_characters = '#&'
+    letters_lower = 'abcdefghijklmnopqrstuvwxyz'
+    letters_upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    numbers = '0123456789'
+
+    random_lower = [''.join(random.choice(letters_lower)) for x in range(1)]
+    random_upper = [''.join(random.choice(letters_upper)) for x in range(1)]
+    random_numbers = [''.join(random.choice(numbers)) for x in range(2)]
+    generated = random_lower + random_upper + random_numbers + random_upper + random_lower
+    generated = ''.join(generated) + special_characters
 
     return generated
