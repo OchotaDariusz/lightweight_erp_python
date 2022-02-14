@@ -31,11 +31,6 @@ def start_module():
         None
     """
     table = data_manager.get_table_from_file("store/games.csv")
-    global id_
-    global title
-    global manufacturer
-    global price
-    global in_stock
 
     options = ["Display a table",
                "Add new record",
@@ -57,7 +52,7 @@ def start_module():
                 add(table)
                 continue
             elif option == "3":
-                remove(table, id_)
+                remove(table, id_=ui.get_inputs(["Please enter: "], title_list[0]))
                 continue
             elif option == "4":
                 update(table, id_)
@@ -126,7 +121,11 @@ def remove(table, id_):
         list: Table without specified record.
     """
 
-    # your code
+    id_ = ''.join(id_)
+    for line in table:
+        if id_ == line[0]:
+            del table[table.index(line)]
+            break
 
     return table
 
