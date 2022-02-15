@@ -18,6 +18,14 @@ import data_manager
 import common
 
 
+ID = 0
+NAME = 1
+MANUFACTURER = 2
+PURCHASE_YEAR = 3
+DURABILITY = 4
+title_list = ["Id", "Name", "Manufacturer", "Purchase year", "Durability"]
+
+
 def start_module():
     """
     Starts this module and displays its menu.
@@ -28,7 +36,48 @@ def start_module():
         None
     """
 
-    # your code
+    file_name = "inventory/inventory.csv"
+    table = data_manager.get_table_from_file(file_name)
+
+    options = ["Display a table",
+               "Add new record",
+               "Remove record",
+               "Update record",
+               "Show items that have not exceeded their durability yet",
+               "Show the average durability times for each manufacturer"]
+
+    while True:
+        try:
+            ui.print_menu("Store Manager", options, "Back to main menu")
+            inputs = ui.get_inputs(["Please enter a number: "], "")
+            option = inputs[0]
+            if option == "1":
+                show_table(table)
+                continue
+            elif option == "2":
+                add(table)
+                # data_manager.write_table_to_file(file_name, table)
+                continue
+            elif option == "3":
+                remove(table, id_=ui.get_inputs(["Please enter: "], title_list[ID]))
+                # data_manager.write_table_to_file(file_name, table)
+                continue
+            elif option == "4":
+                update(table, id_=ui.get_inputs(["Please enter: "], title_list[ID]))
+                # data_manager.write_table_to_file(file_name, table)
+                continue
+            elif option == "5":
+                get_available_items(table, year=ui.get_inputs(["Please enter: "], title_list[PURCHASE_YEAR]))
+                continue
+            elif option == "6":
+                get_average_durability_by_manufacturers(table)
+                continue
+            elif option == "0":
+                break
+            else:
+                raise KeyError("There is no such option.")
+        except KeyError as err:
+            ui.print_error_message(str(err))
 
 
 def show_table(table):
@@ -42,7 +91,8 @@ def show_table(table):
         None
     """
 
-    # your code
+    global title_list
+    ui.print_table(table, title_list)
 
 
 def add(table):
@@ -56,7 +106,8 @@ def add(table):
         list: Table with a new record
     """
 
-    # your code
+    global title_list
+    table = common.add_item(table, title_list)
 
     return table
 
@@ -73,7 +124,7 @@ def remove(table, id_):
         list: Table without specified record.
     """
 
-    # your code
+    table = common.remove_item(table, id_)
 
     return table
 
@@ -90,7 +141,8 @@ def update(table, id_):
         list: table with updated record
     """
 
-    # your code
+    global title_list
+    table = common.update_item(table, title_list, id_)
 
     return table
 
