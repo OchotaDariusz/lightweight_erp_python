@@ -172,8 +172,20 @@ def get_lowest_price_item_id(table):
          string: id
     """
 
-    # your code
+    prices_list = list()
+    for line in table:
+        prices_list.append(line[PRICE])
+    lowest_price = common.min(prices_list)
+    for line in table:
+        if lowest_price == line[PRICE]:
+            id_ = line[ID]
+            break
+        else:
+            continue
 
+    label = 'ID of the item that was sold for the lowest price'
+    ui.print_result(id_, label)
+    return id_
 
 def get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to):
     """
