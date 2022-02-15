@@ -162,7 +162,15 @@ def get_available_items(table, year):
         list: list of lists (the inner list contains the whole row with their actual data types)
     """
 
-    # your code
+    year = year[0]
+    durability_not_exceeded = list()
+    for line in table:
+        if (int(year) - int(line[PURCHASE_YEAR])) < int(line[DURABILITY]):
+            durability_not_exceeded.append(line)
+
+    label = 'Items with not exceeded durability'
+    ui.print_result(durability_not_exceeded, label)
+    return durability_not_exceeded
 
 
 def get_average_durability_by_manufacturers(table):
