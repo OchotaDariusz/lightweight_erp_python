@@ -47,7 +47,7 @@ def start_module():
                "Update record",
                "Show the year with the highest profit",
                "Show the the average (per item) profit in a given year"]
-    
+
     while True:
         try:
             ui.print_menu("Human resources manager", options, "Back to main menu")
