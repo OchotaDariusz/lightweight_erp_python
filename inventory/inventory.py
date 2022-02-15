@@ -176,14 +176,12 @@ def get_average_durability_by_manufacturers(table):
         dict: a dictionary with this structure: { [manufacturer] : [avg] }
     """
 
-    all_manufacturers = list()
     manufacturers = set()
     manufacturers_count = dict()
     durability_list = list()
     sum_of_durability = 0
     avg_durability = 0
     for line in table:
-        all_manufacturers.append(line[MANUFACTURER])
         manufacturers.add(line[MANUFACTURER])
         durability_list.append(line[DURABILITY])
     for manufacturer in manufacturers:
