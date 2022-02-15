@@ -1,6 +1,9 @@
 """ User Interface (UI) module """
 
 
+from turtle import title
+
+
 def print_table(table, title_list):
     """
     Prints table with data.
@@ -22,9 +25,14 @@ def print_table(table, title_list):
         None: This function doesn't return anything it only prints to console.
     """
     print("\n")
-    print("{:<10} {:<40} {:<40} {:<8} {:<10}".format(*title_list))
-    for line in table:
-        print("{:<10} {:<40} {:40} {:<8} {:<10}".format(*line))
+    if len(title_list) == 3:
+        print("{:<10} {:<30} {:<8}".format(*title_list))
+        for line in table:
+            print("{:<10} {:<30} {:<8}".format(*line))
+    if len(title_list) == 5:
+        print("{:<10} {:<40} {:<40} {:<8} {:<10}".format(*title_list))
+        for line in table:
+            print("{:<10} {:<40} {:40} {:<8} {:<10}".format(*line))
 
 
 def print_result(result, label):
