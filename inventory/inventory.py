@@ -190,10 +190,6 @@ def get_average_durability_by_manufacturers(table):
         for line in table:
             if manufacturer == line[MANUFACTURER]:
                 durability_list.append(line[DURABILITY])
-                if manufacturers_count.get(manufacturer) is not None:
-                    manufacturers_count[manufacturer] = int(manufacturers_count.get(manufacturer)) + int(line[DURABILITY])
-                else:
-                    manufacturers_count[manufacturer] = int(line[DURABILITY])
         for durability in durability_list:
             sum_of_durability += int(durability)
         avg_durability = sum_of_durability / len(durability_list)
