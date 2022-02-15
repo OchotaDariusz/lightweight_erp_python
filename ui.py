@@ -149,4 +149,4 @@ def print_error_message(message):
         None: This function doesn't return anything it only prints to console.
     """
 
-    # your code
+    print("ERROR: " + message)
