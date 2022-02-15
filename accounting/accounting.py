@@ -215,11 +215,11 @@ def avg_amount(table, year):
         number
     """
 
-    # year = year[0]
+    given_year = year[0]
     profit_in = list()
     profit_out = list()
     for line in table:
-        if str(year) == line[YEAR]:
+        if str(given_year) == line[YEAR]:
             if "in" == line[TYPE]:
                 profit_in.append(line[AMOUNT])
             else:

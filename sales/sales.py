@@ -204,12 +204,12 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
     Returns:
         list: list of lists (the filtered table)
     """
-    # month_from = month_from[0]
-    # day_from = day_from[0]
-    # year_from = year_from[0]
-    # month_to = month_to[0]
-    # day_to = day_to[0]
-    # year_to = year_to[0]
+    month_from = month_from[0]
+    day_from = day_from[0]
+    year_from = year_from[0]
+    month_to = month_to[0]
+    day_to = day_to[0]
+    year_to = year_to[0]
 
     filtered_list = list()
 

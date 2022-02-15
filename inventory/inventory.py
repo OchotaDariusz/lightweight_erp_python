@@ -162,10 +162,12 @@ def get_available_items(table, year):
         list: list of lists (the inner list contains the whole row with their actual data types)
     """
 
-    # year = year[0]
+    given_year = year[0]
     durability_not_exceeded = list()
     for line in table:
-        if (int(year) - int(line[PURCHASE_YEAR])) < int(line[DURABILITY]):
+        purchase_year = line[PURCHASE_YEAR]
+        durability = line[DURABILITY]
+        if (int(given_year) - int(purchase_year)) < int(durability):
             durability_not_exceeded.append(line)
 
     label = 'Items with not exceeded durability'
