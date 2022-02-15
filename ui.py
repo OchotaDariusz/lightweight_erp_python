@@ -28,7 +28,7 @@ def print_table(table, title_list):
         print("{:<10} {:<30} {:<8}".format(*title_list))
         for line in table:
             print("{:<10} {:<30} {:<8}".format(*line))
-    # table[0] dodaj do tabel jako print insert()
+    # title_list wrzuć w table[0] - dodaj do tabeli poprzez insert()
     # znajdz max(len()) z wartosci tabeli i to jako szerokość
 
     if len(title_list) == 4:
