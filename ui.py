@@ -29,6 +29,10 @@ def print_table(table, title_list):
         print("{:<10} {:<30} {:<8}".format(*title_list))
         for line in table:
             print("{:<10} {:<30} {:<8}".format(*line))
+    if len(title_list) == 4:
+        print("{:<10} {:<30} {:<35} {:<10}".format(*title_list))
+        for line in table:
+            print("{:<10} {:<30} {:35} {:<10}".format(*line))
     if len(title_list) == 5:
         print("{:<10} {:<40} {:<40} {:<15} {:<15}".format(*title_list))
         for line in table:
