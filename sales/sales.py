@@ -187,6 +187,7 @@ def get_lowest_price_item_id(table):
     ui.print_result(id_, label)
     return id_
 
+
 def get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to):
     """
     Question: Which items are sold between two given dates? (from_date < sale_date < to_date)

@@ -160,7 +160,29 @@ def get_longest_name_id(table):
                 the last by alphabetical order of the names)
         """
 
-    # your code
+    len_names_list = list()
+    for line in table:
+        len_names_list.append(len(line[NAME]))
+    longest = common.max(len_names_list)
+    list_of_id = list()
+    for line in table:
+        if longest == len(line[NAME]):
+            id_ = line[ID]
+            list_of_id.append(id_)
+    longest_names = list()
+    for id_ in list_of_id:
+        for line in table:
+            if id_ == line[ID]:
+                longest_names.append(line[NAME])
+    longest_name = common.max(longest_names)
+    for line in table:
+        if longest_name == line[NAME]:
+            id_ = line[ID]
+            break
+
+    label = 'ID of the customer with the longest name'
+    ui.print_result(id_, label)
+    return id_
 
 
 # the question: Which customers has subscribed to the newsletter?
