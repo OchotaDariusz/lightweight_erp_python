@@ -164,7 +164,7 @@ def get_oldest_person(table):
     oldest_persons = list()
     for line in table:
         birth_year_list.append(line[BIRTH_YEAR])
-    oldest_year = common.oldest_year(birth_year_list)
+    oldest_year = common.min(birth_year_list)
     for line in table:
         if oldest_year == line[BIRTH_YEAR]:
             oldest_persons.append(line[NAME])

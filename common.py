@@ -93,9 +93,17 @@ def update_item(table, title_list, id_):
     return table
 
 
-def oldest_year(values_list):
+def min(values_list):
     max_index = values_list[0]
     for item in values_list:
         if item < max_index:
+            max_index = item
+    return max_index
+
+
+def max(values_list):
+    max_index = values_list[0]
+    for item in values_list:
+        if item > max_index:
             max_index = item
     return max_index
