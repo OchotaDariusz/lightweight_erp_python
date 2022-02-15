@@ -198,4 +198,11 @@ def get_subscribed_emails(table):
             list: list of strings (where a string is like "email;name")
         """
 
-    # your code
+    list_of_subscribers = list()
+    for line in table:
+        if int(line[SUBSCRIBED]) == 1:
+            list_of_subscribers.append(line[EMAIL] + ';' + line[NAME])
+
+    label = 'Customers subscribed to the newsletter'
+    ui.print_result(list_of_subscribers, label)
+    return list_of_subscribers
