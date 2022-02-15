@@ -155,8 +155,22 @@ def get_oldest_person(table):
     Returns:
         list: A list of strings (name or names if there are two more with the same value)
     """
-
-    # your code
+    # for line in table:
+    #     max_index = line[BIRTH_YEAR]
+    #     for year in line:
+    #         if year > max_index:
+    #             max_index = year
+    birth_year_list = list()
+    oldest_persons = list()
+    for line in table:
+        birth_year_list.append(line[BIRTH_YEAR])
+    oldest_year = common.oldest_year(birth_year_list)
+    for line in table:
+        if oldest_year == line[BIRTH_YEAR]:
+            oldest_persons.append(line[NAME])
+    label = 'Oldest (person/persons) (is/are)'
+    ui.print_result(oldest_persons, label)
+    return oldest_persons
 
 
 def get_persons_closest_to_average(table):
