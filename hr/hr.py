@@ -184,4 +184,17 @@ def get_persons_closest_to_average(table):
         list: list of strings (name or names if there are two more with the same value)
     """
 
-    # your code
+    birth_year_list = list()
+    sum_of_years = 0
+    person_closest_to_avarage = list()
+    for line in table:
+        birth_year_list.append(line[BIRTH_YEAR])
+    for year in birth_year_list:
+        sum_of_years += int(year)
+    average_birth_year = sum_of_years // len(birth_year_list)
+    for line in table:
+        if str(average_birth_year - 1) == line[BIRTH_YEAR] or str(average_birth_year + 1) == line[BIRTH_YEAR]:
+            person_closest_to_avarage.append(line[NAME])
+    label = '(Person/persons) closest to the average age (is/are)'
+    ui.print_result(person_closest_to_avarage, label)
+    return person_closest_to_avarage
