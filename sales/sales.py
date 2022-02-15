@@ -204,5 +204,39 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
     Returns:
         list: list of lists (the filtered table)
     """
+    month_from = int(month_from[0])
+    day_from = int(day_from[0])
+    year_from = int(year_from[0])
+    month_to = int(month_to[0])
+    day_to = int(day_to[0])
+    year_to = int(year_to[0])
 
-    # your code
+    filtered_list = list()
+
+    for line in table:
+        if year_from == year_to:
+            if int(line[YEAR]) >= year_from and int(line[YEAR]) <= year_to:
+                if month_from < month_to:
+                    if int(line[MONTH]) > month_from and int(line[MONTH]) < month_to:
+                        filtered_list.append(line)
+
+                else:
+                    message = "'Month from' can't be higher than 'Month to' if 'Year from' is equal to 'Year to'!"
+                    ui.print_error_message(message)
+
+        # elif year_from < year_to:
+        #     if int(line[YEAR]) >= year_from and int(line[YEAR]) <= year_to:
+        #         if month_from < month_to:
+        #             if int(line[MONTH]) > month_from and int(line[MONTH]) < month_to:
+        #                 filtered_list.append(line)
+
+        #         else:
+        #             message = "'Month from' can't be higher than 'Month to' if 'Year from' is equal to 'Year to'!"
+        #             ui.print_error_message(message)
+        else:
+            message = "'Year from' can't be higher than 'Year to'!"
+            ui.print_error_message(message)
+
+    label = 'Items sold between two given dates'
+    ui.print_result(filtered_list, label)
+    return filtered_list
