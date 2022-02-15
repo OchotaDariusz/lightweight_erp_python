@@ -1,7 +1,6 @@
 """ User Interface (UI) module """
 
 
-from turtle import title
 
 
 def print_table(table, title_list):
