@@ -78,7 +78,6 @@ def start_module():
                 break
             else:
                 raise KeyError("There is no such option.")
-                continue
         except KeyError as err:
             ui.print_error_message(str(err))
 
