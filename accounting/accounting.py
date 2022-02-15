@@ -214,4 +214,24 @@ def avg_amount(table, year):
         number
     """
 
-    # your code
+    year = year[0]
+    profit_in = list()
+    profit_out = list()
+    for line in table:
+        if str(year) == line[YEAR]:
+            if "in" == line[TYPE]:
+                profit_in.append(line[AMOUNT])
+            else:
+                profit_out.append(line[AMOUNT])
+    sum_of_profit_in = 0
+    sum_of_profit_out = 0
+    for amount in profit_in:
+        sum_of_profit_in += int(amount)
+    for amount in profit_out:
+        sum_of_profit_out += int(amount)
+    profit = sum_of_profit_in - sum_of_profit_out
+    avg_profit = profit / (len(profit_in) + len(profit_out))
+
+    label = f'Average (per item) profit in a {year}'
+    ui.print_result(avg_profit, label)
+    return avg_profit

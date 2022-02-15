@@ -77,6 +77,8 @@ def print_result(result, label):
         print(result)
     if isinstance(result, int):
         print(result)
+    if isinstance(result, float):
+        print(result)
 
 
 def print_menu(title, list_options, exit_message):
