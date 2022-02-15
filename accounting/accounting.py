@@ -163,7 +163,43 @@ def which_year_max(table):
         number
     """
 
-    # your code
+    years_list = list()
+    years = set()
+    years_profit = dict()
+    for line in table:
+        years_list.append(line[YEAR])
+        years.add(line[YEAR])
+    for year in years:
+        profit_in = list()
+        profit_out = list()
+        for line in table:
+            if year == line[YEAR]:
+                if "in" == line[TYPE]:
+                    profit_in.append(line[AMOUNT])
+                else:
+                    profit_out.append(line[AMOUNT])
+        sum_of_profit_in = 0
+        sum_of_profit_out = 0
+        for amount in profit_in:
+            sum_of_profit_in += int(amount)
+        for amount in profit_out:
+            sum_of_profit_out += int(amount)
+        profit = sum_of_profit_in - sum_of_profit_out
+        years_profit[year] = profit
+    profit_years = list()
+    profit_amount = list()
+    for year in years_profit:
+        profit_years.append(year)
+        profit_amount.append(years_profit[year])
+    max_profit = common.max(profit_amount)
+    index = 0
+    for i in range(len(profit_amount)):
+        if max_profit == profit_amount[i]:
+            index = i
+
+    label = 'Year of the highest profit'
+    ui.print_result(profit_years[index], label)
+    return profit_years[index]
 
 
 def avg_amount(table, year):
