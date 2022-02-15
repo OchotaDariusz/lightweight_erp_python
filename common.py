@@ -35,6 +35,11 @@ def generate_random(table):
     generated = random_lower + random_upper + random_numbers + random_upper + random_lower
     generated = ''.join(generated) + special_characters
 
+    for line in table:
+        if generated == line[ID]:
+            generated = generate_random(table)
+            continue
+
     return generated
 
 
