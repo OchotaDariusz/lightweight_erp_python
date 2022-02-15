@@ -54,15 +54,15 @@ def start_module():
                 continue
             elif option == "2":
                 add(table)
-                # data_manager.write_table_to_file(file_name, table)
+                data_manager.write_table_to_file(file_name, table)
                 continue
             elif option == "3":
                 remove(table, id_=ui.get_inputs(["Please enter: "], title_list[ID]))
-                # data_manager.write_table_to_file(file_name, table)
+                data_manager.write_table_to_file(file_name, table)
                 continue
             elif option == "4":
                 update(table, id_=ui.get_inputs(["Please enter: "], title_list[ID]))
-                # data_manager.write_table_to_file(file_name, table)
+                data_manager.write_table_to_file(file_name, table)
                 continue
             elif option == "5":
                 get_longest_name_id(table)
