@@ -162,7 +162,7 @@ def get_available_items(table, year):
         list: list of lists (the inner list contains the whole row with their actual data types)
     """
 
-    year = year[0]
+    # year = year[0]
     durability_not_exceeded = list()
     for line in table:
         if (int(year) - int(line[PURCHASE_YEAR])) < int(line[DURABILITY]):

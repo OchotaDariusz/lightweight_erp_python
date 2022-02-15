@@ -199,7 +199,8 @@ def which_year_max(table):
 
     label = 'Year of the highest profit'
     ui.print_result(profit_years[index], label)
-    return profit_years[index]
+    year_max = profit_years[index]
+    return int(year_max)
 
 
 def avg_amount(table, year):
@@ -214,7 +215,7 @@ def avg_amount(table, year):
         number
     """
 
-    year = year[0]
+    # year = year[0]
     profit_in = list()
     profit_out = list()
     for line in table:
