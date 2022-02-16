@@ -67,7 +67,7 @@ def start_module():
                 data_manager.write_table_to_file(file_name, table)
                 continue
             elif option == "5":
-                get_available_items(table, year=ui.get_inputs(["Please enter: "], title_list[PURCHASE_YEAR]))
+                get_available_items(table, year=int(ui.get_inputs(["Please enter: "], title_list[PURCHASE_YEAR])[0]))
                 continue
             elif option == "6":
                 get_average_durability_by_manufacturers(table)
@@ -162,14 +162,15 @@ def get_available_items(table, year):
         list: list of lists (the inner list contains the whole row with their actual data types)
     """
 
-    given_year = year[0]
     durability_not_exceeded = list()
     for line in table:
-        purchase_year = line[PURCHASE_YEAR]
-        durability = line[DURABILITY]
-        if (int(given_year) - int(purchase_year)) < int(durability):
+        purchase_year = int(line[PURCHASE_YEAR])
+        durability = int(line[DURABILITY])
+        if (year - purchase_year) < durability:
             durability_not_exceeded.append(line)
-
+    for value in durability_not_exceeded:
+        value[PURCHASE_YEAR] = int(value[PURCHASE_YEAR])
+        value[DURABILITY] = int(value[DURABILITY])
     label = 'Items with not exceeded durability'
     ui.print_result(durability_not_exceeded, label)
     return durability_not_exceeded

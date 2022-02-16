@@ -74,12 +74,12 @@ def start_module():
             elif option == "6":
                 get_items_sold_between(
                     table,
-                    month_from=ui.get_inputs(["Please enter: "], title_list[MONTH]),
-                    day_from=ui.get_inputs(["Please enter: "], title_list[DAY]),
-                    year_from=ui.get_inputs(["Please enter: "], title_list[YEAR]),
-                    month_to=ui.get_inputs(["Please enter: "], title_list[MONTH]),
-                    day_to=ui.get_inputs(["Please enter: "], title_list[DAY]),
-                    year_to=ui.get_inputs(["Please enter: "], title_list[YEAR])
+                    month_from=int(ui.get_inputs(["Please enter: "], title_list[MONTH])[0]),
+                    day_from=int(ui.get_inputs(["Please enter: "], title_list[DAY])[0]),
+                    year_from=int(ui.get_inputs(["Please enter: "], title_list[YEAR])[0]),
+                    month_to=int(ui.get_inputs(["Please enter: "], title_list[MONTH])[0]),
+                    day_to=int(ui.get_inputs(["Please enter: "], title_list[DAY])[0]),
+                    year_to=int(ui.get_inputs(["Please enter: "], title_list[YEAR])[0])
                 )
                 continue
             elif option == "0":
@@ -204,25 +204,33 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
     Returns:
         list: list of lists (the filtered table)
     """
-    month_from = month_from[0]
-    day_from = day_from[0]
-    year_from = year_from[0]
-    month_to = month_to[0]
-    day_to = day_to[0]
-    year_to = year_to[0]
+    # month_from = int(month_from[0])
+    # day_from = int(day_from[0])
+    # year_from = int(year_from[0])
+
+    ###
+    
+    # month_to = int(month_to[0]) 
+    # day_to = int(day_to[0])
+    # year_to = int(year_to[0])
+
+    ###
 
     filtered_list = list()
-
+    timestamp_from = (month_from * 2629743) + (day_from * 86400) + (year_from * 31556926)
+    timestamp_to = (month_to * 2629743) + (day_to * 86400) + (year_to * 31556926)
     for line in table:
-        if int(year_from) == int(year_to):
-            if int(line[YEAR]) >= int(year_from) and int(line[YEAR]) <= int(year_to):
-                if int(month_from) < int(month_to):
-                    if int(line[MONTH]) > int(month_from) and int(line[MONTH]) < int(month_to):
-                        filtered_list.append(line)
 
-                else:
-                    message = "'Month from' can't be higher than 'Month to' if 'Year from' is equal to 'Year to'!"
-                    ui.print_error_message(message)
+        table_year = int(line[YEAR])
+        table_month = int(line[MONTH])
+        table_day = int(line[DAY])
+        table_timestamp = (table_month * 2629743) + (table_day * 86400) + (table_year * 31556926)
+        # if year_from == year_to and year_from == table_year:
+        #     if month_from <= month_to:
+        #         if month_from <= table_month <= month_to:
+        #             if day_from < table_day <= day_to:
+        if timestamp_from < table_timestamp < timestamp_to:
+            filtered_list.append(line)
 
         # elif year_from < year_to:
         #     if int(line[YEAR]) >= year_from and int(line[YEAR]) <= year_to:
@@ -233,10 +241,11 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
         #         else:
         #             message = "'Month from' can't be higher than 'Month to' if 'Year from' is equal to 'Year to'!"
         #             ui.print_error_message(message)
-        else:
-            message = "'Year from' can't be higher than 'Year to'!"
-            ui.print_error_message(message)
-
+    for value in filtered_list:
+        value[PRICE] = int(value[PRICE])
+        value[MONTH] = int(value[MONTH])
+        value[DAY] = int(value[DAY])
+        value[YEAR] = int(value[YEAR])
     label = 'Items sold between two given dates'
     ui.print_result(filtered_list, label)
     return filtered_list
