@@ -89,7 +89,6 @@ def show_table(table):
         None
     """
 
-    global title_list
     ui.print_table(table, title_list)
 
 
@@ -105,7 +104,6 @@ def add(table):
     """
 
     table = common.add_item(table, title_list)
-
     return table
 
 
