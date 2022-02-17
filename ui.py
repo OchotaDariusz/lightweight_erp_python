@@ -1,8 +1,6 @@
 """ User Interface (UI) module """
 
 
-
-
 def print_table(table, title_list):
     """
     Prints table with data.
@@ -23,28 +21,34 @@ def print_table(table, title_list):
     Returns:
         None: This function doesn't return anything it only prints to console.
     """
+
+    table.insert(0, title_list)
     print("\n")
-    if len(title_list) == 3:
-        print("{:<10} {:<30} {:<8}".format(*title_list))
-        for line in table:
-            print("{:<10} {:<30} {:<8}".format(*line))
-    # title_list wrzuć w table[0] - dodaj do tabeli poprzez insert()
-    # znajdz max(len()) z wartosci tabeli i to jako szerokość
-
-    if len(title_list) == 4:
-        print("{:<10} {:<30} {:<35} {:<10}".format(*title_list))
-        for line in table:
-            print("{:<10} {:<30} {:35} {:<10}".format(*line))
-
-    if len(title_list) == 5:
-        print("{:<10} {:<40} {:<40} {:<15} {:<15}".format(*title_list))
-        for line in table:
-            print("{:<10} {:<40} {:40} {:<15} {:<15}".format(*line))
-
-    if len(title_list) == 6:
-        print("{:<10} {:<40} {:<10} {:<10} {:<10} {:<15}".format(*title_list))
-        for line in table:
-            print("{:<10} {:<40} {:<10} {:<10} {:<10} {:<15}".format(*line))
+    lines_to_print = []
+    for row in range(len(table)):
+        len_table_line = 0
+        columns_to_print = []
+        for column in range(len(title_list)):
+            max_lenght = 0
+            for line in range(len(table)):
+                lenght = len(table[line][column])
+                if max_lenght < lenght:
+                    max_lenght = lenght
+            column_element = "| " + str(table[row][column]) + str((" " * (max_lenght - len(table[row][column])))) + " |"
+            columns_to_print.append(column_element)
+            for i in column_element:
+                len_table_line += 1
+        lines_to_print.append(columns_to_print)
+    print("/ " + ("-" * (len_table_line - 4)) + " \\")
+    line_counter = 0
+    for line in lines_to_print:
+        line_counter += 1
+        if line_counter == len(lines_to_print):
+            print(''.join(line).replace("||", " |"))
+            print("\\ " + ("-" * (len_table_line - 4)) + " /")
+        else:
+            print(''.join(line).replace("||", " |"))
+            print("| " + ("-" * (len_table_line - 4)) + " |")
 
 
 def print_result(result, label):
