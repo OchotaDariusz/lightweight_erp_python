@@ -104,7 +104,6 @@ def add(table):
         list: Table with a new record
     """
 
-    global title_list
     table = common.add_item(table, title_list)
 
     return table
@@ -123,7 +122,6 @@ def remove(table, id_):
     """
 
     table = common.remove_item(table, id_)
-
     return table
 
 
@@ -139,9 +137,7 @@ def update(table, id_):
         list: table with updated record
     """
 
-    global title_list
     table = common.update_item(table, title_list, id_)
-
     return table
 
 
