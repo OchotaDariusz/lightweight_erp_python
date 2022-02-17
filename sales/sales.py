@@ -146,7 +146,6 @@ def update(table, id_):
     """
 
     table = common.update_item(table, title_list, id_)
-
     return table
 
 
