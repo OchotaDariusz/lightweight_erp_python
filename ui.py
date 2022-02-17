@@ -39,16 +39,16 @@ def print_table(table, title_list):
             for i in column_element:
                 len_table_line += 1
         lines_to_print.append(columns_to_print)
-    print("/ " + ("-" * (len_table_line - 4)) + " \\")
+    print("/-" + ("-" * (len_table_line - 4)) + "-\\")
     line_counter = 0
     for line in lines_to_print:
         line_counter += 1
         if line_counter == len(lines_to_print):
             print(''.join(line).replace("||", " |"))
-            print("\\ " + ("-" * (len_table_line - 4)) + " /")
+            print("\\-" + ("-" * (len_table_line - 4)) + "-/")
         else:
             print(''.join(line).replace("||", " |"))
-            print("| " + ("-" * (len_table_line - 4)) + " |")
+            print("|-" + ("-" * (len_table_line - 4)) + "-|")
 
 
 def print_result(result, label):
