@@ -107,3 +107,23 @@ def max(values_list):
         if item > max_index:
             max_index = item
     return max_index
+
+
+def profit_in_out(table, year, YEAR, TYPE, AMOUNT):
+    profit_in = list()
+    profit_out = list()
+    for line in table:
+        if str(year) == line[YEAR]:
+            if "in" == line[TYPE]:
+                profit_in.append(line[AMOUNT])
+            else:
+                profit_out.append(line[AMOUNT])
+    sum_of_profit_in = 0
+    sum_of_profit_out = 0
+    for amount in profit_in:
+        sum_of_profit_in += int(amount)
+    for amount in profit_out:
+        sum_of_profit_out += int(amount)
+    profit = sum_of_profit_in - sum_of_profit_out
+    avg_profit = profit / (len(profit_in) + len(profit_out))
+    return profit, avg_profit

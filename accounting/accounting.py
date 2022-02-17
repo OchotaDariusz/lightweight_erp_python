@@ -72,7 +72,7 @@ def start_module():
                 which_year_max(table)
                 continue
             elif option == "6":
-                avg_amount(table, year=ui.get_inputs(["Please enter: "], title_list[YEAR]))
+                avg_amount(table, year=int(ui.get_inputs(["Please enter: "], title_list[YEAR])[0]))
                 continue
             elif option == "0":
                 break
@@ -93,7 +93,6 @@ def show_table(table):
         None
     """
 
-    global title_list
     ui.print_table(table, title_list)
 
 
@@ -108,9 +107,7 @@ def add(table):
         list: Table with a new record
     """
 
-    global title_list
     table = common.add_item(table, title_list)
-
     return table
 
 
@@ -127,7 +124,6 @@ def remove(table, id_):
     """
 
     table = common.remove_item(table, id_)
-
     return table
 
 
@@ -143,9 +139,7 @@ def update(table, id_):
         list: table with updated record
     """
 
-    global title_list
     table = common.update_item(table, title_list, id_)
-
     return table
 
 
@@ -163,28 +157,12 @@ def which_year_max(table):
         number
     """
 
-    years_list = list()
     years = set()
     years_profit = dict()
     for line in table:
-        years_list.append(line[YEAR])
         years.add(line[YEAR])
     for year in years:
-        profit_in = list()
-        profit_out = list()
-        for line in table:
-            if year == line[YEAR]:
-                if "in" == line[TYPE]:
-                    profit_in.append(line[AMOUNT])
-                else:
-                    profit_out.append(line[AMOUNT])
-        sum_of_profit_in = 0
-        sum_of_profit_out = 0
-        for amount in profit_in:
-            sum_of_profit_in += int(amount)
-        for amount in profit_out:
-            sum_of_profit_out += int(amount)
-        profit = sum_of_profit_in - sum_of_profit_out
+        profit, avg_profit = common.profit_in_out(table, year, YEAR, TYPE, AMOUNT)
         years_profit[year] = profit
     profit_years = list()
     profit_amount = list()
@@ -215,22 +193,7 @@ def avg_amount(table, year):
         number
     """
 
-    profit_in = list()
-    profit_out = list()
-    for line in table:
-        if str(year) == line[YEAR]:
-            if "in" == line[TYPE]:
-                profit_in.append(line[AMOUNT])
-            else:
-                profit_out.append(line[AMOUNT])
-    sum_of_profit_in = 0
-    sum_of_profit_out = 0
-    for amount in profit_in:
-        sum_of_profit_in += int(amount)
-    for amount in profit_out:
-        sum_of_profit_out += int(amount)
-    profit = sum_of_profit_in - sum_of_profit_out
-    avg_profit = profit / (len(profit_in) + len(profit_out))
+    profit, avg_profit = common.profit_in_out(table, year, YEAR, TYPE, AMOUNT)
 
     label = f'Average (per item) profit in a {year}'
     ui.print_result(avg_profit, label)
