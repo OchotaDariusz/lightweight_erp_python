@@ -40,14 +40,12 @@ def start_module():
 
     file_name = "sales/sales.csv"
     table = data_manager.get_table_from_file(file_name)
-
     options = ["Display a table",
                "Add new record",
                "Remove record",
                "Update record",
                "Show the id of the item that was sold for the lowest price",
                "Show the items that are sold between two given dates"]
-
     while True:
         try:
             ui.print_menu("Human resources manager", options, "Back to main menu")
@@ -101,7 +99,6 @@ def show_table(table):
         None
     """
 
-    global title_list
     ui.print_table(table, title_list)
 
 
@@ -116,9 +113,7 @@ def add(table):
         list: Table with a new record
     """
 
-    global title_list
     table = common.add_item(table, title_list)
-
     return table
 
 
@@ -135,7 +130,6 @@ def remove(table, id_):
     """
 
     table = common.remove_item(table, id_)
-
     return table
 
 
@@ -151,7 +145,6 @@ def update(table, id_):
         list: table with updated record
     """
 
-    global title_list
     table = common.update_item(table, title_list, id_)
 
     return table
@@ -180,9 +173,6 @@ def get_lowest_price_item_id(table):
         if lowest_price == line[PRICE]:
             id_ = line[ID]
             break
-        else:
-            continue
-
     label = 'ID of the item that was sold for the lowest price'
     ui.print_result(id_, label)
     return id_
@@ -204,43 +194,14 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
     Returns:
         list: list of lists (the filtered table)
     """
-    # month_from = int(month_from[0])
-    # day_from = int(day_from[0])
-    # year_from = int(year_from[0])
-
-    ###
-    
-    # month_to = int(month_to[0]) 
-    # day_to = int(day_to[0])
-    # year_to = int(year_to[0])
-
-    ###
 
     filtered_list = list()
     timestamp_from = (month_from * 2629743) + (day_from * 86400) + (year_from * 31556926)
     timestamp_to = (month_to * 2629743) + (day_to * 86400) + (year_to * 31556926)
     for line in table:
-
-        table_year = int(line[YEAR])
-        table_month = int(line[MONTH])
-        table_day = int(line[DAY])
-        table_timestamp = (table_month * 2629743) + (table_day * 86400) + (table_year * 31556926)
-        # if year_from == year_to and year_from == table_year:
-        #     if month_from <= month_to:
-        #         if month_from <= table_month <= month_to:
-        #             if day_from < table_day <= day_to:
+        table_timestamp = (int(line[MONTH]) * 2629743) + (int(line[DAY]) * 86400) + (int(line[YEAR]) * 31556926)
         if timestamp_from < table_timestamp < timestamp_to:
             filtered_list.append(line)
-
-        # elif year_from < year_to:
-        #     if int(line[YEAR]) >= year_from and int(line[YEAR]) <= year_to:
-        #         if month_from < month_to:
-        #             if int(line[MONTH]) > month_from and int(line[MONTH]) < month_to:
-        #                 filtered_list.append(line)
-
-        #         else:
-        #             message = "'Month from' can't be higher than 'Month to' if 'Year from' is equal to 'Year to'!"
-        #             ui.print_error_message(message)
     for value in filtered_list:
         value[PRICE] = int(value[PRICE])
         value[MONTH] = int(value[MONTH])
