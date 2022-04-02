@@ -49,6 +49,7 @@ def print_table(table, title_list):
         else:
             print(''.join(line).replace("||", " |"))
             print("|-" + ("-" * (len_table_line - 4)) + "-|")
+    table.pop(0)
 
 
 def print_result(result, label):
